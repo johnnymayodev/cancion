@@ -1,0 +1,20 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "./generated/"
+  binaryTargets = ["native"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Song {
+  ID     Int    @id @default(autoincrement())
+  UUID   String @unique
+  Title  String
+  Artist String
+  Album  String
+  Year   String
+  Genre  String
+}

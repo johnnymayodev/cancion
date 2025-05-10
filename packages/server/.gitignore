@@ -1,0 +1,24 @@
+# server/.gitignore
+
+# Dependencies
+node_modules/
+
+# Build files
+dist/
+build/
+out/
+
+# Prisma
+prisma/generated/
+
+# Logs
+logs
+*.log
+
+# Temporary files
+temp/
+*.tmp
+*.temp
+
+# Cache files
+.cache/

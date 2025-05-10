@@ -1,0 +1,50 @@
+services:
+  client:
+    container_name: cancion-client
+    build:
+      context: .
+      dockerfile: packages/client/Dockerfile
+    ports:
+      - "${CLIENT_OPENPORT}:8000"
+    volumes:
+      - ./packages/client:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - server
+
+  server:
+    container_name: cancion-server
+    build:
+      context: .
+      dockerfile: packages/server/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./packages/server:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASS=${DATABASE_PASS}
+    depends_on:
+      - database
+
+  database:
+    container_name: cancion-database
+    image: mysql
+    ports:
+      - "${DATABASE_PORT}:3306"
+    environment:
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_ROOT_USER: ${DATABASE_USER}
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASS}
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:

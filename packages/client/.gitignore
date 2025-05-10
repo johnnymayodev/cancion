@@ -1,0 +1,21 @@
+# client/.gitignore
+
+# Dependencies
+node_modules/
+
+# Build files
+dist/
+build/
+out/
+
+# Logs
+logs
+*.log
+
+# Temporary files
+temp/
+*.tmp
+*.temp
+
+# Cache files
+.cache/
