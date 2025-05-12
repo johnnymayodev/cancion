@@ -3,6 +3,8 @@ import * as cheerio from "cheerio";
 
 import type { GeniusOptions, Lyric } from "#/types";
 
+import { log } from "@/utilities/log";
+
 const getTitle = (title: string, artist: string) =>
   `${title} ${artist}`
     .toLowerCase()
@@ -24,10 +26,14 @@ export const getLyricsFromGenius = async (
   const reqUrl = `${searchUrl}${encodeURIComponent(song)}`;
   const headers = { Authorization: `Bearer ${apiKey}` };
 
+  log("info", `Searching for ${song} on Genius...`);
+
   let { data } = await axios.get(
     authHeader ? reqUrl : `${reqUrl}&access_token=${apiKey}`,
     authHeader ? { headers } : undefined,
   );
+
+  log("info", `Found ${data.response.hits.length} results on Genius...`);
 
   const results = data.response.hits.map(({ result }: { result: any }) => ({
     id: result.id,
@@ -36,10 +42,14 @@ export const getLyricsFromGenius = async (
     url: result.url,
   }));
 
+  log("info", `Fetching lyrics from ${results[0].url}...`);
+
   const { data: lyricsData } = await axios.get(results[0].url);
   const $ = cheerio.load(lyricsData);
 
   let lyrics = $("div.lyrics").text().trim();
+
+  log("info", `Lyrics fetched from ${results[0].url}...`);
 
   if (!lyrics) {
     lyrics = $('div[class^="Lyrics__Container"]')
@@ -66,6 +76,8 @@ export const getLyricsFromGenius = async (
     line: line,
   }));
 
+  log("info", `Lyrics parsed...`);
+
   const stringifiedLyricsObject = JSON.stringify(lyricsObject, null, 2);
 
   return {
@@ -81,10 +93,14 @@ export const getAlbumArtURLFromGenius = async (options: GeniusOptions) => {
   const reqUrl = `${searchUrl}${encodeURIComponent(song)}`;
   const headers = { Authorization: `Bearer ${apiKey}` };
 
+  log("info", `Searching for ${song} on Genius...`);
+
   let { data } = await axios.get(
     authHeader ? reqUrl : `${reqUrl}&access_token=${apiKey}`,
     authHeader ? { headers } : undefined,
   );
+
+  log("info", `Found ${data.response.hits.length} results on Genius...`);
 
   const results = data.response.hits.map(({ result }: { result: any }) => ({
     id: result.id,
@@ -92,6 +108,8 @@ export const getAlbumArtURLFromGenius = async (options: GeniusOptions) => {
     albumArt: result.song_art_image_url,
     url: result.url,
   }));
+
+  log("info", `Fetching album art from ${results[0].url}...`);
 
   return results[0].albumArt;
 };
