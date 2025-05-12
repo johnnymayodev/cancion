@@ -43,8 +43,8 @@ function Index() {
   const navigate = useNavigate();
 
   const defaultValues = {
-    url: "https://music.apple.com/us/album/tití-me-preguntó/1622045624?i=1622045635",
-    // url: "",
+    // url: "https://music.apple.com/us/album/tití-me-preguntó/1622045624?i=1622045635",
+    url: "",
   };
 
   const form = useForm({

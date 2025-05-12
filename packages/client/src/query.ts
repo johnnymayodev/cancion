@@ -1,4 +1,9 @@
-const API_URL = "http://localhost:3000";
+const URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000/"
+    : "https://api.johnnymayo.com/cancion/";
+
+const API_URL = `${URL}api`;
 
 export const getSongFromSongURL = async (songURL: string) => {
   const songURLDetails = songURL.split("album/")[1];

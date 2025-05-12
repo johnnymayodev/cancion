@@ -12,7 +12,7 @@ import "@/index.css";
 import "@/App.css";
 
 scan({
-  enabled: true,
+  enabled: window.location.hostname === "localhost",
   log: false,
 });
 
