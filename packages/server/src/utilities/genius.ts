@@ -3,7 +3,7 @@ import * as cheerio from "cheerio";
 
 import type { GeniusOptions, Lyric } from "#/types";
 
-import { log } from "@/utilities/log";
+import { log } from "#/log";
 
 const getTitle = (title: string, artist: string) =>
   `${title} ${artist}`
