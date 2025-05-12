@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 // Components
 import { H1 } from "@/components/typography/H1";
@@ -15,14 +17,39 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+// example url: https://music.apple.com/us/album/tití-me-preguntó/1622045624?i=1622045635
+
+const schema = z.object({
+  url: z
+    .string()
+    .url({ message: "Please enter a valid url" })
+    .refine(
+      (url) => {
+        if (!url) return false;
+        try {
+          const urlObj = new URL(url);
+          return urlObj.hostname === "music.apple.com";
+        } catch (error) {
+          return false;
+        }
+      },
+      {
+        message: "Please enter a valid url",
+      },
+    ),
+});
+
 function Index() {
   const navigate = useNavigate();
 
   const defaultValues = {
-    url: "https://music.apple.com/us/album/eoo/1787022393?i=1787023929",
+    url: "https://music.apple.com/us/album/tití-me-preguntó/1622045624?i=1622045635",
+    // url: "",
   };
 
   const form = useForm({
+    resolver: zodResolver(schema),
+    mode: "onSubmit",
     defaultValues,
   });
 

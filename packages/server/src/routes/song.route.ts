@@ -1,10 +1,15 @@
 import { Hono } from "hono";
 
-import { getSong, getSongs } from "@/controllers/song.controller";
+import {
+  getSong,
+  getSongs,
+  getSongFromURL,
+} from "@/controllers/song.controller";
 
 const song = new Hono();
 
-song.get("/:id", getSong);
+song.get("/url/:title/:albumID", getSongFromURL);
 song.get("/", getSongs);
+song.get("/:id", getSong);
 
 export default song;
