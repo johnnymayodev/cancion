@@ -1,5 +1,3 @@
-import { log } from "#/log";
-
 const URL =
   window.location.hostname === "localhost"
     ? "http://localhost:3000/"
@@ -7,10 +5,12 @@ const URL =
 
 const API_URL = `${URL}api`;
 
+console.log("[INFO]", `Using ${API_URL}...`);
+
 export const getSongFromSongURL = async (songURL: string) => {
   const songURLDetails = songURL.split("album/")[1];
 
-  log("info", `Getting song from ${songURLDetails}...`);
+  console.log("[INFO]", `Getting song from ${songURLDetails}...`);
 
   const response = await fetch(`${API_URL}/song/url/${songURLDetails}`, {
     method: "GET",
@@ -18,13 +18,13 @@ export const getSongFromSongURL = async (songURL: string) => {
 
   const data = await response.json();
 
-  log("info", `Song fetched from ${songURLDetails}...`);
+  console.log("[INFO]", `Song fetched from ${songURLDetails}...`);
 
   return data;
 };
 
 export const getLyric = async (songUUID: string) => {
-  log("info", `Getting lyric from ${songUUID}...`);
+  console.log("[INFO]", `Getting lyric from ${songUUID}...`);
 
   const response = await fetch(`${API_URL}/lyric/${songUUID}`, {
     method: "GET",
@@ -32,7 +32,7 @@ export const getLyric = async (songUUID: string) => {
 
   const data = await response.json();
 
-  log("info", `Lyric fetched from ${songUUID}...`);
+  console.log("[INFO]", `Lyric fetched from ${songUUID}...`);
 
   return data;
 };
