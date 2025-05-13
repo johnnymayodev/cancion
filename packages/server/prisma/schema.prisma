@@ -25,6 +25,5 @@ model Lyric {
   ID       Int    @id @default(autoincrement())
   UUID     String @unique
   SongUUID String
-  // content is a very big string
   Content  String @db.Text
 }

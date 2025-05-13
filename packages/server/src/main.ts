@@ -5,12 +5,12 @@ import routes from "@/routes";
 
 export default function create(app: Hono): Hono {
   app.use(
-    "/api/*",
+    "/*",
     cors({
-      origin: ["http://localhost:8000", "https://cancion.johnnymayo.com"],
+      origin: ["http://localhost:8000"],
     }),
   );
-  app.route("/api", routes);
+  app.route("/", routes);
 
   return app;
 }
