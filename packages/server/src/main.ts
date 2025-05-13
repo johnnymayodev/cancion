@@ -10,7 +10,7 @@ export default function create(app: Hono): Hono {
       origin: ["http://localhost:8000"],
     }),
   );
-  app.route("/", routes);
+  app.route("/api", routes);
 
   return app;
 }

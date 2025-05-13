@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: packages/client/Dockerfile
     ports:
-      - "${CLIENT_OPENPORT}:8000"
+      - "${CLIENT_PORT}:8000"
     volumes:
       - ./packages/client:/app
       - /app/node_modules
@@ -20,7 +20,7 @@ services:
       context: .
       dockerfile: packages/server/Dockerfile
     ports:
-      - "3000:3000"
+      - "${SERVER_PORT}:3000"
     volumes:
       - ./packages/server:/app
       - /app/node_modules

@@ -1,6 +1,6 @@
-const URL = "http://localhost:3000/";
+const URL = "http://localhost:3000";
 
-const API_URL = `${URL}`;
+const API_URL = `${URL}/api`;
 
 export const getSongFromSongURL = async (songURL: string) => {
   const songURLDetails = songURL.split("album/")[1];
