@@ -31,6 +31,7 @@ services:
       - DATABASE_NAME=${DATABASE_NAME}
       - DATABASE_USER=${DATABASE_USER}
       - DATABASE_PASS=${DATABASE_PASS}
+      - GENIUS_API_KEY=${GENIUS_API_KEY}
     depends_on:
       - database
 

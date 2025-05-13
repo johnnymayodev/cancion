@@ -2,6 +2,8 @@ import type { Context } from "hono";
 
 import songService from "@/services/song.service";
 
+import env from "@/utilities/env";
+
 // Utilities
 import { getSongFromAppleMusic } from "@/utilities/applemusic";
 import { getAlbumArtURLFromGenius } from "@/utilities/genius";
@@ -32,12 +34,12 @@ export const getSongFromURL = async (c: Context) => {
   if (!song) {
     const songInfo = await getSongFromAppleMusic(url);
 
-    if (!process.env.GENIUS_API_KEY) {
-      return c.json({ error: "GENIUS_API_KEY is not set" }, 500);
+    if (!env.GENIUS_API_KEY) {
+      return c.json({ error: "Song Service: GENIUS_API_KEY is not set" }, 500);
     }
 
     const albumArtURL = await getAlbumArtURLFromGenius({
-      apiKey: process.env.GENIUS_API_KEY,
+      apiKey: env.GENIUS_API_KEY,
       title: songInfo.Title,
       artist: songInfo.Artist,
       optimizeQuery: true,

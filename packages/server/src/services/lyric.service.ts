@@ -1,8 +1,7 @@
 import prisma from "@/utilities/database";
 import { v4 as uuidv4 } from "uuid";
-import { configDotenv } from "dotenv";
 
-configDotenv();
+import env from "@/utilities/env";
 
 import type { GeniusOptions, Lyric } from "#/types";
 import { getLyricsFromGenius } from "@/utilities/genius";
@@ -21,12 +20,12 @@ export const getLyric = async (SongUUID: string) => {
       return "No song found";
     }
 
-    if (!process.env.GENIUS_API_KEY) {
-      return "GENIUS_API_KEY is not set";
+    if (!env.GENIUS_API_KEY) {
+      return "Lyric Service: GENIUS_API_KEY is not set";
     }
 
     const geniusOptions: GeniusOptions = {
-      apiKey: process.env.GENIUS_API_KEY,
+      apiKey: env.GENIUS_API_KEY,
       title: song.Title,
       artist: song.Artist,
       optimizeQuery: true,

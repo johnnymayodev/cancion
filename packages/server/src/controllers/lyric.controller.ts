@@ -1,7 +1,6 @@
 import type { Context } from "hono";
-import { configDotenv } from "dotenv";
 
-configDotenv();
+import env from "@/utilities/env";
 
 import lyricService from "@/services/lyric.service";
 
@@ -19,8 +18,8 @@ export const getLyric = async (c: Context) => {
   const lyric = await lyricService.getLyric(SongUUID);
 
   if (!lyric) {
-    if (!process.env.GENIUS_API_KEY) {
-      return c.json({ error: "GENIUS_API_KEY is not set" }, 500);
+    if (!env.GENIUS_API_KEY) {
+      return c.json({ error: "Lyric Service: GENIUS_API_KEY is not set" }, 500);
     }
 
     const song = await songService.getSong(SongUUID);
@@ -30,7 +29,7 @@ export const getLyric = async (c: Context) => {
     }
 
     const geniusOptions: GeniusOptions = {
-      apiKey: process.env.GENIUS_API_KEY,
+      apiKey: env.GENIUS_API_KEY,
       title: song.Title,
       artist: song.Artist,
       optimizeQuery: true,
