@@ -7,7 +7,7 @@ export default function create(app: Hono): Hono {
   app.use(
     "/*",
     cors({
-      origin: ["http://localhost:8000"],
+      origin: ["http://localhost:8000", "https://cancion.johnnymayo.com/"],
     }),
   );
   app.route("/api", routes);
