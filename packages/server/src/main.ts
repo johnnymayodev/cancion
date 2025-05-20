@@ -12,5 +12,15 @@ export default function create(app: Hono): Hono {
   );
   app.route("/api", routes);
 
+  app.get("/health", (c) => {
+    return c.json(
+      {
+        message: "I'm doing great! Thank you for asking!",
+        uptime: process.uptime().toFixed(4),
+      },
+      200,
+    );
+  });
+
   return app;
 }
