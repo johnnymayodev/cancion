@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     port: 8000,
-    allowedHosts: ["localhost"],
+    allowedHosts: ["localhost", "cancion.johnnymayo.com"],
   },
   resolve: {
     alias: {

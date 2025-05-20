@@ -10,6 +10,8 @@ RUN bun install
 
 COPY packages/server .
 
+RUN bunx prisma generate
+
 EXPOSE 3000
 
 CMD ["bun", "run", "dev", "--host", "0.0.0.0"] 
