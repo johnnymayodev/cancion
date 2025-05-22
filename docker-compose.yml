@@ -6,6 +6,9 @@ services:
       dockerfile: packages/client/Dockerfile
     ports:
       - "${CLIENT_PORT}:8000"
+    volumes:
+      - ./packages/client:/app
+      - /app/node_modules
     environment:
       - NODE_ENV=development
     depends_on:
@@ -18,6 +21,9 @@ services:
       dockerfile: packages/server/Dockerfile
     ports:
       - "${SERVER_PORT}:3000"
+    volumes:
+      - ./packages/server:/app
+      - /app/node_modules
     environment:
       - NODE_ENV=development
       - DATABASE_URL=${DATABASE_URL}

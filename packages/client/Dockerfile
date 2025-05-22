@@ -2,11 +2,9 @@ FROM oven/bun:1
 
 WORKDIR /app
 
-COPY packages/client/package.json .
+COPY packages/client .
 
 RUN bun install
-
-COPY packages/client .
 
 EXPOSE 8000
 

@@ -4,11 +4,9 @@ RUN apt-get update -y && apt-get install -y openssl
 
 WORKDIR /app
 
-COPY packages/server/package.json .
+COPY packages/server .
 
 RUN bun install
-
-COPY packages/server .
 
 RUN bunx prisma generate
 
