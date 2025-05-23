@@ -4,7 +4,17 @@ import { cors } from "hono/cors";
 import routes from "@/routes";
 
 export default function create(app: Hono): Hono {
-  app.use("*", cors({ origin: ["*"] }));
+  app.use(
+    "*",
+    cors({
+      origin: [
+        "localhost",
+        "*.johnnymayo.com",
+        "apicancion.johnnymayo.com",
+        "cancion.johnnymayo.com",
+      ],
+    }),
+  );
 
   app.route("/api", routes);
 
