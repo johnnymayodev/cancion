@@ -7,8 +7,9 @@ import { defineConfig } from "vite";
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
+    host: true,
     port: 8000,
-    allowedHosts: ["localhost", "cancion.johnnymayo.com"],
+    allowedHosts: true,
   },
   resolve: {
     alias: {
