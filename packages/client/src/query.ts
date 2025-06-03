@@ -12,6 +12,7 @@ export const getSongFromSongURL = async (songURL: string) => {
 
   const response = await fetch(`${API_URL}/song/url/${songURLDetails}`, {
     method: "GET",
+    credentials: "include",
   });
 
   const data = await response.json();
@@ -26,6 +27,7 @@ export const getLyric = async (songUUID: string) => {
 
   const response = await fetch(`${API_URL}/lyric/${songUUID}`, {
     method: "GET",
+    credentials: "include",
   });
 
   const data = await response.json();

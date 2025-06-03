@@ -4,7 +4,17 @@ import { cors } from "hono/cors";
 import routes from "@/routes";
 
 export default function create(app: Hono): Hono {
-  app.use("/*", cors());
+  app.use(
+    "/*",
+    cors({
+      origin: ["https://cancion.johnnymayo.com", "http://localhost:3000"],
+      allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowHeaders: ["Content-Type", "Authorization"],
+      exposeHeaders: ["Content-Length", "X-Kuma-Revision"],
+      maxAge: 600,
+      credentials: true,
+    }),
+  );
 
   app.route("/api", routes);
 
