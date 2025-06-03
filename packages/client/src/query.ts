@@ -1,6 +1,6 @@
 const URL =
   window.location.hostname === "localhost"
-    ? "http://localhost:3002"
+    ? "http://localhost:3000"
     : "https://apicancion.johnnymayo.com";
 
 const API_URL = `${URL}/api`;
